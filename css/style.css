@@ -1,0 +1,439 @@
+/*head*/
+.head {
+}
+.head-container {
+	margin: 0px 147px;
+
+}
+.head-line {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.head-logo {
+}
+.head-logo-holder {
+	display: flex;
+	align-items: center;
+}
+.head-logo-img {
+
+}
+.head-logo-text {
+}
+.h-l-t{
+	color: black;
+	text-decoration: none;
+	font-weight: 500px;
+	font-size: 21px;
+}
+.head-phone {
+	font-size: 25px;
+	font-weight: 700px;
+	padding-left: 500px
+}
+.head-btn {
+	padding-right: 10px;
+}
+.h-b-v{
+	padding-right: 5px;
+	color: black;
+	text-decoration: none;
+	font-weight: 400px;
+	font-size: 16px;
+	border-right: 1px solid black;
+}
+.h-b-r{
+	color: black;
+	text-decoration: none;
+	padding-left: 1px;
+	font-weight: 400px;
+	font-size: 16px;
+
+}
+
+
+
+
+
+
+/*menu*/
+.menu {
+	padding-bottom: 20px;
+}
+.menu-container {
+	height: 59px;
+	background-color: #66BC3D;
+
+}
+.menu-line {
+	padding-top: 10px;
+	padding-left: 147px;
+	padding-right: 147px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.menu-nav {
+}
+.m-v-t{
+	color: white;
+	text-decoration: none;
+	font-size: 18px;
+	font-weight: 500px;
+	margin-right: 20px;
+}
+.menu-btn {
+	border: 1px solid white;
+	padding: 10px 40px 10px 40px;
+	border-radius: 12px;
+}
+.m-b-t{
+	color: white;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: 500px;
+}
+
+
+
+
+
+
+
+
+/*slider*/
+.slider {
+	padding-bottom: 50px;
+
+}
+.slider-container {
+	margin: 0px 147px;
+	background-color: #EF3A36;
+}
+.slider-lane {
+	display: flex;
+	justify-content: space-around;
+	position: relative;
+}
+.butL {
+	position: absolute;
+	top: 192px;
+	left: 14px;
+	
+}
+.Eclipse {
+	position: absolute;
+	bottom: 26px;
+	top: 382px;
+	left: 56px;
+}
+.slider-logo-l {
+}
+.slider-logo-text {
+}
+.s-l-t-e {
+	color: white;
+	text-decoration: none;
+	font-size: 50px;
+	font-weight: 700px;
+	position: absolute;
+	left: 97px;
+	top: 152px;
+}
+.s-l-t-b {
+	color: white;
+	text-decoration: none;
+	font-size: 35px;
+	font-weight: 500px;
+	position: absolute;
+	left: 97px;
+	top: 228px;
+}
+.slider-logo-r {
+}
+.slider-logo-img {
+}
+.s-l-i-p {
+}
+.butR {
+	position: absolute;
+	top: 192px;
+	right: 14px;
+}
+
+
+
+
+
+/*catalog-1*/
+.catalog-1{
+	padding-bottom: 50px;
+
+}
+.catalog-1-head {
+	font-size: 28px;
+}
+.catalog-1-container {
+	background-color: #F9F9F9;
+	margin: 0px 147px;
+}
+.cards-holder {
+
+	display: flex;
+justify-content: space-between;
+}
+
+.catalog-1-cards {
+}
+.card {
+	background-color: white;
+	width: 264;
+	height: 451;
+	margin-top: 30px;
+}
+.card-phon-img {
+padding: 15px 15px 15px 15px;
+}
+.card-img {
+}
+.card-title{
+	padding-top: 25px;
+	text-align: left;
+	font-size: 16px;
+	font-weight: 500px;
+}
+.card-desc {
+	padding-top: 15px;
+	text-align: left;
+	font-size: 12px;
+}
+.price-line{
+	padding-top: 34px;
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 18px;
+}
+.card-price-ru {
+	font-size: 22px;
+	
+}
+.card-price-uc {
+	font-size: 14px;
+}
+.card-btn {
+	text-align: center;
+	border: 1px solid grey;
+	width: 224px;
+	height: 40px;
+	padding-top:11px;
+	border-radius: 12px;
+	transition: color 0.3s linear;
+}
+.card-btn:hover{
+	background-color: #66BC3D;
+}
+.c-b-t{
+	color: gray;
+	text-decoration: none;
+}
+
+/*catalog 2*/
+.catalog-2{
+	padding-bottom: 66px;
+
+}
+
+
+
+
+
+/*about*/
+.about {
+}
+.about-container {
+	margin: 0px 147px;
+}
+.about-head {
+	padding-bottom: 23px;
+	font-size: 28px;
+	font-weight: 500;
+}
+.about-text {
+}
+.abz-1 {
+	padding-bottom: 40px;
+	font-size: 20px;
+	font-weight: 400;
+}
+.abz-2 {
+	padding-bottom: 20px;
+	font-size: 20px;
+	font-weight: 400;
+}
+.abz-3 {
+	padding-bottom: 20px;
+	font-size: 20px;
+	font-weight: 400;
+}
+.abz-4 {
+	font-size: 20px;
+	font-weight: 400;
+}
+
+
+
+
+
+
+/*reviews*/
+.reviews {
+	padding-top: 50px;
+}
+.reviews-container {
+	
+	height: 520px;
+	margin: 0px 147px;
+	background-color: #F9F9F9;
+}
+.reviews-line {
+	display: flex;
+	justify-content: space-around;
+	position: relative;
+
+}
+.reviews-head {
+	position: absolute;
+	left: 0px;
+	font-size: 28px;
+	font-weight: 500;
+}
+.rbutL {
+	position: absolute;
+	top: 251px;
+	left: 15px;
+}
+.reviews-cards {
+	position: absolute;
+	padding-top: 61px;
+	padding-left: 98px;
+	padding-right: 88px;
+}
+.card-holder-reviews {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+.card-reviews {
+	width: 459px;
+	height: 190px;
+	margin-right: 31px;
+	background-color: white;
+}
+.head-line-card {
+	padding-top: 26px;
+	padding-left: 21px;
+	padding-right: 21px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.card-head-name {
+	font-size: 18px;
+	font-weight: 700;
+}
+.card-head-date {
+	font-size: 16px;
+	color: #66BC3D;
+}
+.card-reviews-img {
+	padding-top: 12px;
+	padding-left: 21px;
+	padding-right: 21px;
+}
+.card-reviews-text {
+	padding-top: 18px;
+	padding-left: 21px;
+	padding-right: 21px;
+	font-size: 16px;
+	font-weight: 400;
+}
+.rbutR {
+	position: absolute;
+	top: 251px;
+	right: 0px;
+}
+
+.reviews-cards-2{
+	padding-top: 281px;
+	padding-left: 98px;
+	padding-right: 88px;
+}
+.reviews-Eclipse{
+	position: absolute;
+	display: flex;
+	padding-top: 506px;
+	padding-left: 517px;
+	padding-right: 533px;
+}
+.r-e-i{
+	margin-right: 8px;
+}
+
+
+
+/*contacts*/
+.contacts {
+	padding-top: 57px;
+}
+.contacts-contaier {
+	margin: 0px 147px;	
+}
+.contacts-line {
+	display: flex;
+	justify-content: space-around;
+}
+.contacts-text {
+	padding-top: 38px;
+	padding-left: 179px;
+	padding-bottom: 141px;
+}
+.contacts-text-head {
+	font-size: 24px;
+	font-weight: 700;
+}
+.contacts-text-body {
+	font-size: 20px;
+	font-weight: 400;
+}
+.contacts-img {
+	padding-top: 38px;
+	padding-right: 147px;
+	padding-bottom: 44px;
+}
+/*fotter*/
+.footer {
+	height: 152px;
+}
+.footer-container {
+	margin: 0px 147px;
+}
+.footer-line {
+	display: flex;
+	justify-content: space-between;
+}
+.footer-text {
+	padding-left: 147px;
+	padding-top: 60px;
+	font-size: 18px;
+	font-weight: 700;
+}
+.footer-img {
+	padding-top: 55px;
+}
+.footer-phone {
+	padding-top: 60px;
+	padding-right: 147px;
+	font-size: 22px;
+	font-weight: 700;
+}

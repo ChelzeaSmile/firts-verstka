@@ -1,0 +1,13 @@
+{
+    "files.autoSave": "afterDelay",
+    "editor.tabSize": 3,
+    "editor.cursorStyle": "underline",
+    "editor.comments.insertSpace": true,
+    "editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"editor.hover.delay": 1500,
+	"editor.mouseWheelZoom": true,
+	"window.closeWhenEmpty": false,
+	"workbench.editor.closeEmptyGroups": false,
+	"editor.formatOnSave": true
+}
