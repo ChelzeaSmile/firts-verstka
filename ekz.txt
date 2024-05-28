@@ -1,0 +1,364 @@
+==========================================
+класс DataBase
+        SqlConnection sqlConnection = new SqlConnection(@"Data Source=COMPUTER;Initial Catalog=eskaro;Integrated Security=True");
+
+        public void openconnection()
+        {
+            if(sqlConnection.State == System.Data.ConnectionState.Closed)
+            {
+                sqlConnection.Open();
+            }
+        }
+        public void closeconnection()
+        {
+            if (sqlConnection.State == System.Data.ConnectionState.Open)
+            {
+                sqlConnection.Close();
+            }
+        }
+        public SqlConnection getconnection()
+        {
+            return sqlConnection;
+        }
+============================================
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+============================================
+Форма входа
+    public partial class vhod : Form
+    {
+        DataBase dataBase = new DataBase();
+        public vhod()
+        {
+            InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            if (textBox1.Text == "" && textBox2.Text == "")
+            {
+                MessageBox.Show("Заполните все поля");
+            }
+            else
+            {
+                ifvhod();
+            }
+        }
+        public void ifvhod()
+        {
+            var login = textBox1.Text;
+            var password = textBox2.Text;
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataTable table = new DataTable();
+            string querry = $"SELECT login, password FROM dbo.[user] WHERE login = '{login}' AND password = '{password}'";
+            SqlCommand command = new SqlCommand(querry, dataBase.getconnection());
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+            if (table.Rows.Count == 1)
+            {
+                MessageBox.Show("Вы успешно вошли!", "Вход", MessageBoxButtons.OK);
+                adm adm = new adm();
+                adm.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Неправельные данные", "Вход", MessageBoxButtons.OK);
+            }
+
+        }
+
+    }
+}
+========================================
+Форма Регистрации
+    public partial class registration : Form
+    {
+        DataBase dataBase = new DataBase();
+        public registration()
+        {
+            InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
+        }
+
+        private void registration_Load(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int userroleid = Convert.ToInt32(textBox6.Text);
+            if (userroleid != 2 && userroleid != 3)
+            {
+                MessageBox.Show("введите правильную роль");
+            }
+            else
+            {
+                reg();
+            }
+        }
+        public void reg()
+        {
+            var login = textBox1.Text;
+            var password = textBox2.Text;
+            var firstname = textBox3.Text;
+            var lastname = textBox4.Text;
+            var middlename = textBox5.Text;
+            int userroleid = Convert.ToInt32(textBox6.Text);
+
+            string querry = $"INSERT into dbo.[user](login, password, lastname, firstname, middlename, userroleid) values('{login}','{password}','{lastname}','{firstname}','{middlename}','{userroleid}')";
+            SqlCommand command = new SqlCommand(querry, dataBase.getconnection());
+            dataBase.openconnection();
+            if (check())
+            {
+                return;
+            }
+            if (command.ExecuteNonQuery() == 1)
+            {
+                MessageBox.Show("Аккаунт Успешно Создан!", "Регистрация", MessageBoxButtons.OK);
+
+            }
+            else
+            {
+                MessageBox.Show("Аккаунт не создан", "Регистрация", MessageBoxButtons.OK);
+            }
+            dataBase.closeconnection();
+        }
+        private Boolean check()
+        {
+            var login = textBox1.Text;
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataTable table = new DataTable();
+            string querry = $"SELECT login FROM dbo.[user] WHERE login = '{login}'";
+            SqlCommand command = new SqlCommand(querry, dataBase.getconnection());
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+            if (table.Rows.Count > 0)
+            {
+                MessageBox.Show("Данный логин уже используется!", "Регистрация", MessageBoxButtons.OK);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            adm adm = new adm();
+            adm.Show();
+            this.Hide();
+        }
+    }
+}
+==================================================
+Форма Админа
+
+    enum RowState
+    {
+        Modified
+    }
+
+    public partial class adm : Form
+    {
+        DataBase dataBase = new DataBase();
+        int selectRow;
+        public adm()
+        {
+            InitializeComponent();
+        }
+        private void columnsDGV1()
+        {
+            dgv1.Columns.Add("datecreation", "datecreation");
+            dgv1.Columns.Add("orderstatus", "orderstatus");
+            dgv1.Columns.Add("paymentstatus", "paymentstatus");
+            dgv1.Columns.Add("language", "language");
+            dgv1.Columns.Add("format", "format");
+            dgv1.Columns.Add("amounttranslation", "amounttranslation");
+            dgv1.Columns.Add("orderid", "orderid");
+        }
+        private void readrowsDGV1(DataGridView dgw1, IDataRecord record)
+        {
+            dgw1.Rows.Add(
+                record.GetDateTime(0), 
+                record.GetString(1), 
+                record.GetString(2),
+                record.GetString(3),
+                record.GetString(4), 
+                record.GetInt32(5), 
+                record.GetInt32(6));
+        }
+        private void zapolDGV1(DataGridView dgw1)
+        {
+            dgw1.Rows.Clear();
+            string querry = $"SELECT * FROM dbo.[order]";
+            SqlCommand command = new SqlCommand(querry, dataBase.getconnection());
+            dataBase.openconnection();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read()) 
+            {
+                readrowsDGV1(dgw1,reader);
+            }
+            reader.Close();
+        }
+        private void columnsDGV2()
+        {
+            dgv2.Columns.Add("userid", "userid");
+            dgv2.Columns.Add("login", "login");
+            dgv2.Columns.Add("password", "password");
+            dgv2.Columns.Add("status", "status");
+            dgv2.Columns.Add("lastname", "lastname");
+            dgv2.Columns.Add("firstname", "firstname");
+            dgv2.Columns.Add("middlename", "middlename");
+            dgv2.Columns.Add("userroleid", "userroleid");
+        }
+        private void readrowsDGV2(DataGridView dgw2, IDataRecord record2)
+        {
+            dgw2.Rows.Add(
+                record2.GetInt32(0), 
+                record2.GetString(1), 
+                record2.GetString(2), 
+                record2.GetString(3), 
+                record2.GetString(4), 
+                record2.GetString(5), 
+                record2.GetString(6), 
+                record2.GetInt32(7));
+        }
+        private void zapolDGV2(DataGridView dgw2)
+        {
+            dgw2.Rows.Clear();
+            string querry2 = $"SELECT * FROM dbo.[user]";
+            SqlCommand command2 = new SqlCommand(querry2, dataBase.getconnection());
+            dataBase.openconnection();
+            SqlDataReader reader2 = command2.ExecuteReader();
+            while (reader2.Read())
+            {
+                readrowsDGV2(dgw2, reader2);
+            }
+            reader2.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            registration registration = new registration();
+            registration.Show();
+            this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            vhod vhod = new vhod();
+            vhod.Show();
+            this.Hide();
+        }
+
+        private void adm_Load(object sender, EventArgs e)
+        {
+            columnsDGV1();
+            zapolDGV1(dgv1);
+            columnsDGV2();
+            zapolDGV2(dgv2);
+
+        }
+        private void zaproc()
+        {
+            dataBase.openconnection();
+            for (int Index = 0; Index < dgv2.Rows.Count; Index++) 
+            {
+                    string id = dgv2.Rows[Index].Cells[0].Value.ToString();
+                    string status = dgv2.Rows[Index].Cells[3].Value.ToString();
+                    var querry = $"UPDATE dbo.[user] set status = '{status}' WHERE userid='{id}'";
+                    SqlCommand command = new SqlCommand(querry, dataBase.getconnection());
+                    command.ExecuteNonQuery();
+            }
+            dataBase.closeconnection();
+        }
+
+        private void dgv2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            selectRow = e.RowIndex;
+            if(e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgv2.Rows[selectRow];
+                string id = row.Cells[0].Value.ToString();
+                string name = row.Cells[5].Value.ToString();
+                string fam = row.Cells[4].Value.ToString();
+                label1.Text = id;
+                label2.Text = name;
+                label3.Text = fam;
+                textBox1.Text = row.Cells[3].Value.ToString();
+
+            }
+        }
+        private void yvolitButn()
+        {
+            var select = dgv2.CurrentCell.RowIndex;
+            var status = textBox1.Text;
+
+            if (textBox1.Text == string.Empty)
+            {
+                MessageBox.Show("Поле не может быть пустым", "Ошибка", MessageBoxButtons.OK);
+            }
+            else
+            {
+                if (textBox1.Text != "Работает" && textBox1.Text != "Уволен")
+                {
+                    MessageBox.Show("Укажите статус Работает или Уволен!", "Ошибка", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    MessageBox.Show("Изменен статус пользователя", "Успех", MessageBoxButtons.OK);
+                    dgv2.Rows[select].Cells[3].Value = textBox1.Text;
+                }
+            }
+
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            yvolitButn();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            zaproc();
+        }
+    }
+}
+====================================================================
+Добавление
+             
+                string orderstatus = textBox2.Text.ToString();
+                string paymentstatus = textBox3.Text.ToString();
+                string language = textBox4.Text.ToString();
+                string format = textBox5.Text.ToString();
+                int amounttranslation;
+                if (int.TryParse(textBox6.Text, out amounttranslation))
+                {
+                    var querry = $"INSERT INTO dbo.[order] (datecreation,orderstatus,paymentstatus,language,format,amounttranslation) VALUES('{datecreation}','{orderstatus}','{paymentstatus}','{language}','{format}','{amounttranslation}')";
+                    SqlCommand command = new SqlCommand(querry, dataBase.getconnection());
+                    command.ExecuteNonQuery();
+                    MessageBox.Show("Заказ Добавлен!", "Создание", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    MessageBox.Show("Заказ Не Добавлен", "Создание", MessageBoxButtons.OK);
+                }
+
+                dataBase.closeconnection();
